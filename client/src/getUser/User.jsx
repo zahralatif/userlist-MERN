@@ -9,7 +9,7 @@ const User = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/users");
+        const response = await axios.get("http://localhost:8000/api/v1/users");
         setUsers(response.data);
       } catch (error) {
         console.log("Error while fetching data", error);
@@ -20,7 +20,7 @@ const User = () => {
 
   const deleteUser = async (userId) => {
     await axios
-      .delete(`http://localhost:8000/api/delete/${userId}`)
+      .delete(`http://localhost:8000/api/v1/delete/${userId}`)
       .then((response) => {
         setUsers((prevUser) => prevUser.filter((user) => user._id !== userId));
         toast.success(response.data.message, { position: "top-right" });
@@ -48,7 +48,7 @@ const User = () => {
               <th scope="col">S.No.</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
-              <th scope="col">mobile</th>
+              <th scope="col">Phone</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -59,7 +59,7 @@ const User = () => {
                   <td>{index + 1}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
-                  <td>{user.mobile}</td>
+                  <td>{user.phone}</td>
                   <td className="actionButtons">
                     <Link
                       to={`/update/` + user._id}

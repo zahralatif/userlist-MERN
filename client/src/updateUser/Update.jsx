@@ -5,14 +5,12 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const Update = () => {
-  // Initial state for the user form
   const users = {
     name: "",
     email: "",
-    mobile: "",
+    phone: "",
   };
 
-  // state to manage user form data
   const { id } = useParams();
   const [user, setUser] = useState(users);
   const navigate = useNavigate();
@@ -25,7 +23,7 @@ const Update = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/user/${id}`)
+      .get(`http://localhost:8000/api/v1/user/${id}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -37,9 +35,8 @@ const Update = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     await axios
-      .put(`http://localhost:8000/api/update/user/${id}`, user)
+      .put(`http://localhost:8000/api/v1/edit/user/${id}`, user)
       .then((response) => {
-        // console.log(response.data.message);
         toast.success(response.data.message, { position: "top-right" });
         navigate("/");
       })
@@ -81,20 +78,20 @@ const Update = () => {
           />
         </div>
         <div className="inputGroup">
-          <label htmlFor="mobile">mobile:</label>
+          <label htmlFor="phone">Phone:</label>
           <input
             type="text"
-            value={user.mobile}
+            value={user.phone}
             onChange={inputHandler}
-            id="mobile"
-            name="mobile"
+            id="phone"
+            name="phone"
             autoComplete="off"
-            placeholder="Enter your mobile"
+            placeholder="Enter your phone"
           />
         </div>
         <div className="inputGroup">
           <button type="submit" className="btn btn-primary mt-4 p-2">
-            Submit
+            Update
           </button>
         </div>
       </form>

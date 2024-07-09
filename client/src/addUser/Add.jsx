@@ -5,14 +5,12 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const Add = () => {
-  // Initial state for the user form
   const users = {
     name: "",
     email: "",
-    mobile: "",
+    phone: "",
   };
 
-  // state to manage user form data
   const [user, setUser] = useState(users);
   const navigate = useNavigate();
 
@@ -24,7 +22,7 @@ const Add = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://localhost:8000/api/user", user)
+      .post("http://localhost:8000/api/v1/user", user)
       .then((response) => {
         toast.success(response.data.message, { position: "top-right" });
         navigate("/");
@@ -65,14 +63,14 @@ const Add = () => {
           />
         </div>
         <div className="inputGroup">
-          <label htmlFor="mobile">Mobile:</label>
+          <label htmlFor="phone">Phone:</label>
           <input
             type="text"
             onChange={inputHandler}
-            id="mobile"
-            name="mobile"
+            id="phone"
+            name="phone"
             autoComplete="off"
-            placeholder="Enter your Mobile"
+            placeholder="Enter your phone"
           />
         </div>
         <div className="inputGroup">
